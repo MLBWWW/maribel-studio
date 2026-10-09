@@ -8,6 +8,8 @@ export const MAX_LINKS = 32;
 export const vertexShader = /* glsl */ `
   varying vec2 vUv;
 
+uniform vec2 uColorize;
+
   void main() {
     vUv = uv;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
