@@ -8,8 +8,6 @@ export const MAX_LINKS = 32;
 export const vertexShader = /* glsl */ `
   varying vec2 vUv;
 
-uniform vec2 uColorize;
-
   void main() {
     vUv = uv;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
@@ -676,12 +674,6 @@ export const fragmentShader = /* glsl */ `
     // what darkens everything.
     // B&W master: everything is desaturated except the card under the cursor,
     // which keeps its full colour so the hover reads as a reveal.
-    if (uColorize.y > 0.5) {
-      float hovA = 1.0 - smoothstep(-aa, aa, hovD);
-      float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
-      col = mix(vec3(lum), col, hovA);
-    }
-
     gl_FragColor = vec4(col, alpha);
   }
 `;
