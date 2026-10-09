@@ -55,3 +55,11 @@ canvas {
 
 body { filter: grayscale(1); }
 body:hover { filter: grayscale(0); }
+/* 卡片图片默认黑白，鼠标悬浮卡片变彩色 */
+.three‑mesh {
+  filter: grayscale(100%);
+  transition: filter 0.35s ease;
+}
+.three‑mesh:hover {
+  filter: grayscale(0%);
+}
