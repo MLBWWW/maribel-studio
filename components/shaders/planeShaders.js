@@ -672,6 +672,14 @@ export const fragmentShader = /* glsl */ `
     // returns the authored sRGB values, and this shader adds no output
     // encoding of its own — decoding on read without encoding on write is
     // what darkens everything.
+    // B&W master: everything is desaturated except the card under the cursor,
+    // which keeps its full colour so the hover reads as a reveal.
+    if (uColorize.y > 0.5) {
+      float hovA = 1.0 - smoothstep(-aa, aa, hovD);
+      float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
+      col = mix(vec3(lum), col, hovA);
+    }
+
     gl_FragColor = vec4(col, alpha);
   }
 `;
