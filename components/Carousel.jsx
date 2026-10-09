@@ -135,6 +135,7 @@ export default function Carousel() {
       uSheen: { value: 0 },
       uMouse: { value: new THREE.Vector4() },
       uMelt: { value: new THREE.Vector4() },
+      uColorize: { value: new THREE.Vector2(-1, 1) }, // x = hovered card, y = B&W on/off
       uAsciiTex: { value: asciiTexture },
       // gather progress, cloud expansion, cell px, opacity
       uIntro: { value: new THREE.Vector4(1, 1, 12, 0) },
@@ -867,6 +868,9 @@ export default function Carousel() {
       }
 
       over = overI;
+
+      // Feed the hovered card into the B&W shader so only it regains colour.
+      uniforms.uColorize.value.x = over;
 
       // The ring itself never owns particles. A single latched hover card
       // does, so its field can finish flowing out after the pointer leaves
